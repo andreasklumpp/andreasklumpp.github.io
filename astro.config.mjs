@@ -30,5 +30,5 @@ export default defineConfig({
             },
           ],
         ],
-      }),, sitemap(), tailwind()],
+      }), sitemap(), tailwind()],
 });
