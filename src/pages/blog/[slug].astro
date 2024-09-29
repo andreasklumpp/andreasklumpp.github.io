@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+/>
+
+<Layout title="test-post">
+  <div class="contents">
+    <a
+      class="font-roboto text-gray-50 col-span-3 flex gap-2 font-light mb-4"
+      href="/"
+    >
+      <span class="material-symbols-outlined text-gray-50"> arrow_back </span>
+      Back to main page</a
+    >
+    <article class="prose contents">
+      <!-- <Image
+        src={post.data.cover}
+        alt={post.data.title}
+        class="object-cover object-center !m-0 aspect-square block"
+        width={600}
+        height={600}
+      /> -->
+      <h1
+        class="my-0 font-bebasNeue text-white text-8xl col-start-1 col-span-12"
+      >
+        {post.data.title}
+      </h1>
+      <p
+        class="col-start-1 col-span-12 my-0 text-gray-50 font-bold text-roboto"
+      >
+        {post.data.excerpt}
+      </p>
+      <div
+        class="col-start-1 col-span-12 my-0 text-gray-50 font-light text-roboto"
+      >
+        <Content />
+      </div>
+    </article>
+  </div>
+</Layout>
