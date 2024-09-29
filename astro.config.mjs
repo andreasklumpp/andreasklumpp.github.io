@@ -2,8 +2,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
-import sitemap from '@astrojs/sitemap';
-
 import tailwind from '@astrojs/tailwind';
 import rehypeSlug from 'rehype-slug';
 import rehypePrettyCode from 'rehype-pretty-code';
@@ -30,5 +28,5 @@ export default defineConfig({
             },
           ],
         ],
-      }), sitemap(), tailwind()],
+      }), tailwind()],
 });
