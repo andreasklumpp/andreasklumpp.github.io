@@ -10,7 +10,7 @@ import rehypePrettyCode from 'rehype-pretty-code';
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://example.com',
+    site: 'https://andreasklumpp.github.io',
     integrations: [mdx({
         syntaxHighlight: false,
         rehypePlugins: [
