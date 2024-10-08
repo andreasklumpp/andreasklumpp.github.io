@@ -7,14 +7,15 @@ const allPosts = await getCollection("blog");
 
 <Layout title="Welcome to Astro.">
   <main class="contents">
-    <h1 class="font-bebasNeue text-white text-8xl col-start-1 col-span-4 mb-5">
-      Andreas Klumpp
+    <h1
+      class="font-bebasNeue text-white text-8xl col-start-1 col-span-6 lg:col-span-12 mb-5"
+    >
+      Andreas <br /> Klumpp
     </h1>
-    <span class="col-span-8"></span>
     {
       allPosts.map((post) => (
         <a
-          class="font-roboto col-span-4 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-600 hover:bg-gray-100"
+          class="font-roboto col-span-6 md:col-span-3 lg:col-span-4 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-600 hover:bg-gray-100"
           href={"/blog/" + post.slug}
         >
           <h2 class="font-roboto font-bold">{post.data.title}</h2>
