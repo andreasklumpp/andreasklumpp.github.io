@@ -14,7 +14,7 @@ const allPosts = await getCollection("blog");
     {
       allPosts.map((post) => (
         <a
-          class="font-roboto col-span-4 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-600 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+          class="font-roboto col-span-4 block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-lg shadow-gray-600 hover:bg-gray-100"
           href={"/blog/" + post.slug}
         >
           <h2 class="font-roboto font-bold">{post.data.title}</h2>
