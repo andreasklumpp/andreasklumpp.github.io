@@ -1,0 +1,49 @@
+---
+const conferences = [
+  {
+    title:
+      "Exploring the (testing) pyramid – An expedition towards more accessibility",
+    conference: "LeadDev Berlin",
+    date: "XX.YY.2024",
+    description:
+      "Nisi laboris sunt exercitation Lorem eu ullamco nostrud enim culpa dolor duis mollit excepteur. Aliquip aute irure magna irure excepteur consequat. Deserunt labore cupidatat mollit elit et nulla sit adipisicing voluptate veniam cillum et officia. Do dolore cupidatat nulla et magna aliquip minim..",
+  },
+  {
+    title:
+      "Exploring the (testing) pyramid – An expedition towards more accessibility",
+    conference: "Social Developers Conference",
+    date: "xx.YY.2024",
+    description:
+      "Dolore nisi occaecat do veniam occaecat. Enim laboris veniam dolor in excepteur ad laborum cillum. Sunt culpa reprehenderit cillum aliqua amet dolore aute veniam aute aliqua fugiat. Incididunt dolor non sit labore non ea duis labore nostrud ea. Dolore in irure aliqua minim mollit proident proident. Qui nulla fugiat ea et reprehenderit duis eiusmod. Qui voluptate reprehenderit ea nostrud qui sit adipisicing ea pariatur eu enim eiusmod.",
+  },
+  {
+    title: "5 ways to level up your accessibility game",
+    conference: "Unicorns in Tech Summit",
+    date: "XX.YY.2023",
+    description:
+      "This talk will inspire you and provide you with a fundamental understanding around accessibility and why it is relevant. It will provide you with five steps which you can incorporate in your personal sensible defaults and apply in your team. This will enable you to develop accessible products with very little additional effort. Let’s break down the barriers today!",
+  },
+];
+---
+
+<section class="contents py-16">
+  <h2
+    class="col-span-12 font-bebasNeue text-6xl font-bold text-center text-white"
+  >
+    Conference Speaking
+  </h2>
+
+  {
+    conferences.map((conf) => (
+      <div class="col-span-4 m-5">
+        <div class="bg-white/10 backdrop-blur-md p-6 rounded-md shadow-md border border-white/20 text-white">
+          <h3 class="text-xl font-semibold mb-2">{conf.title}</h3>
+          <p class="text-sm text-gray-300">
+            {conf.conference} · {conf.date}
+          </p>
+          <p class="mt-4 text-gray-200">{conf.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</section>

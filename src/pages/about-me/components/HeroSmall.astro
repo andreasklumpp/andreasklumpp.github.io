@@ -1,0 +1,28 @@
+---
+import heroImage from "../../../images/AK.png";
+// No props for now
+---
+
+<section class="col-span-12 grid grid-cols-12">
+  <div class="col-span-6 flex items-center px-10">
+    <div>
+      <h1 class="font-bebasNeue text-white text-8xl font-bold mb-4">
+        About me
+      </h1>
+      <p class="font-roboto text-white text-2xl font-weight-200">
+        Elit commodo irure labore occaecat magna. Nulla exercitation commodo
+        ipsum velit. Laboris culpa anim sit sit ullamco cillum Lorem
+        reprehenderit cupidatat et.
+      </p>
+    </div>
+  </div>
+
+  <div class="col-span-6 relative">
+    <img
+      src={heroImage.src}
+      alt="Hero Image"
+      class="max-w-25"
+      style="mask-image: linear-gradient(to bottom, white 50%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, white 70%, transparent 100%);"
+    />
+  </div>
+</section>
