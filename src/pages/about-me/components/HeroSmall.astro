@@ -21,8 +21,55 @@ import heroImage from "../../../images/AK.png";
     <img
       src={heroImage.src}
       alt="Hero Image"
-      class="max-w-25"
+      class="max-w-[75%]"
       style="mask-image: linear-gradient(to bottom, white 50%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, white 70%, transparent 100%);"
     />
+  </div>
+</section>
+
+<style>
+  .scroll-indicator {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-indicator:hover {
+    opacity: 1;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+</style>
+
+<section class="col-span-12 grid grid-cols-12 relative">
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+    <div class="scroll-indicator">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="animate-bounce"
+      >
+        <path d="M12 5v14M5 12l7 7 7-7"></path>
+      </svg>
+    </div>
   </div>
 </section>

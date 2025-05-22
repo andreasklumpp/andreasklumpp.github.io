@@ -1,0 +1,73 @@
+---
+const entries = [
+  {
+    side: "left",
+    title: "2021 – Present",
+    headline: "Senior Full-Stack Developer @Thoughtworks",
+    content: "Lorem ipsum",
+  },
+  {
+    side: "right",
+    title: "2023 – Present",
+    headline: "Lecturer @DHBW Stuttgart",
+    content: "Green IT",
+  },
+  {
+    side: "left",
+    title: "May 2020 – December 2020",
+    headline: "Mobile Developer @Schultech",
+    content: "Lorem ipsum",
+  },
+  {
+    side: "right",
+    title: "December 2019 – May 2020",
+    headline: "Intern, Master Thesis @Mercedes-Benz AG",
+    content: "Lorem ipsum",
+  },
+  {
+    side: "left",
+    title: "Januray 2016 – May 2018",
+    headline: "Corporate Bachelor Student @Hewlett Packard Enterprise",
+    content: "Lorem ipsum",
+  },
+];
+---
+
+<section class="col-span-12 relative py-20">
+  <div class="text-center mb-12">
+    <h2 class="font-bebasNeue text-6xl font-bold text-white">
+      Professional Experience
+    </h2>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto">
+    <!-- Vertical Line -->
+    <div
+      class="absolute top-0 left-1/2 w-0.5 h-full border-l-2 border-dotted border-gray-500 transform -translate-x-1/2"
+    >
+    </div>
+
+    <!-- Timeline Items -->
+    {
+      entries.map((entry) => (
+        <div
+          class={`relative mb-12 flex ${entry.side === "left" ? "justify-start" : "justify-end"}`}
+        >
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+            <div class="w-2 h-2 border-2 border-white rounded-full shadow-md" />
+          </div>
+
+          <div class="w-1/2 px-4">
+            <div class="bg-white/50 backdrop-blur-md p-6  rounded-xl">
+              <h3 class="text-sm font-bold text-gray-700 mb-1">
+                {entry.title}
+              </h3>
+              <h4 class="text-xl font-semibold mb-2">{entry.headline}</h4>
+              <p class="text-gray-700">{entry.content}</p>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>

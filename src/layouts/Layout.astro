@@ -1,6 +1,4 @@
 ---
-import Navbar from "../components/Navbar/Navbar.astro";
-
 interface Props {
   title: string;
 }
@@ -32,7 +30,6 @@ const currentPath = Astro.url.pathname;
     <title>{title}</title>
   </head>
   <body class="font-sans">
-    <Navbar currentPath={currentPath} />
     <div
       class="fixed inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:linear-gradient(140deg,_rgba(213,188,170,1)_0%,_rgba(221,221,219,1)_50%,_rgba(205,219,204,1)_100%)]"
     >
