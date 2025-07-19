@@ -24,18 +24,13 @@ const currentPath = Astro.url.pathname;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lilita+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
   <body class="font-sans">
-    <div
-      class="fixed inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:linear-gradient(140deg,_rgba(213,188,170,1)_0%,_rgba(221,221,219,1)_50%,_rgba(205,219,204,1)_100%)]"
-    >
-    </div>
-
-    <div class="relative z-10 grid grid-cols-12 max-w-fit mx-auto gap-0">
+    <div class="m-20">
       <slot />
     </div>
   </body>

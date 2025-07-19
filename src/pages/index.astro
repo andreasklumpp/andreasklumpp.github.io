@@ -1,8 +1,49 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroSection from "../sections/hero-section/HeroSection.astro";
 ---
 
 <Layout title="Andreas Klumpp Homepage">
-  <HeroSection />
+  <h1 class="font-archivoBlack text-6xl text-white">Hey! 👋 I'm Andreas.</h1>
+  <div class="mt-6 space-x-6">
+    <a
+      href="/blog"
+      class="text-white inline-flex items-center border-b-2 border-dotted border-white hover:text-blue-400 transition-colors"
+      style="text-underline-offset: 4px;"
+    >
+      Blog
+      <svg
+        class="ml-2 w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M4 12L12 4M12 4H6M12 4V10"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+    <a
+      href="https://github.com/andreasklumpp"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-white inline-flex items-center border-b-2 border-dotted border-white hover:text-blue-400 transition-colors"
+      style="text-underline-offset: 4px;"
+    >
+      GitHub
+      <svg
+        class="ml-2 w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M4 12L12 4M12 4H6M12 4V10"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </a>
+  </div>
 </Layout>
