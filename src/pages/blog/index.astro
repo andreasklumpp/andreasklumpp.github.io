@@ -1,7 +1,46 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+
+const allPosts = await getCollection("blog");
+
+function formatDate(dateInput: string | Date) {
+  if (!dateInput) return "";
+  const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+  });
+}
 ---
 
 <Layout title="Blog">
-  <h1 class="font-archivoBlack text-6xl text-white">Blog</h1>
+  <a
+    href="/"
+    aria-label="Back to home"
+    class="inline-block align-middle text-white hover:text-gray-400 text-3xl"
+  >
+    &#8592;
+  </a>
+
+  <h1 class="font-archivoBlack text-6xl text-white inline-block align-middle">
+    Blog
+  </h1>
+
+  <ul class="mt-8 space-y-4">
+    {
+      allPosts.map((post) => (
+        <li class="mb-8">
+          <a href={`/blog/${post.slug}/`} class="block">
+            <span class="font-bold text-white text-xl">{post.data.title}</span>
+            <br />
+            <span class="text-gray-400 text-sm">
+              {formatDate(post.data.date)}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </Layout>
