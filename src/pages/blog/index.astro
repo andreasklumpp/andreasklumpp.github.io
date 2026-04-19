@@ -2,45 +2,221 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
-const allPosts = await getCollection("blog");
+type Post = { slug: string; data: { title: string; excerpt: string; date: string | Date; tags: string[] } };
+
+const allPosts = ((await getCollection("blog")) as Post[]).sort(
+  (a: Post, b: Post) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 
 function formatDate(dateInput: string | Date) {
   if (!dateInput) return "";
   const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit",
-  });
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" });
 }
 ---
 
-<Layout title="Blog">
-  <a
-    href="/"
-    aria-label="Back to home"
-    class="inline-block align-middle text-white hover:text-gray-400 text-3xl"
-  >
-    &#8592;
-  </a>
+<Layout title="Blog — Andreas Klumpp">
+  <main class="blog-main">
+    <div class="blog-hero">
+      <a href="/" class="back-link">← Home</a>
+      <h1 class="blog-title">BLOG</h1>
+      <p class="blog-sub">{allPosts.length} article{allPosts.length !== 1 ? "s" : ""}</p>
+    </div>
 
-  <h1 class="font-archivoBlack text-6xl text-white inline-block align-middle">
-    Blog
-  </h1>
-
-  <ul class="mt-8 space-y-4">
-    {
-      allPosts.map((post) => (
-        <li class="mb-8">
-          <a href={`/blog/${post.slug}/`} class="block">
-            <span class="font-bold text-white text-xl">{post.data.title}</span>
-            <br />
-            <span class="text-gray-400 text-sm">
-              {formatDate(post.data.date)}
-            </span>
+    <div class="posts-list">
+      {
+        allPosts.map((post, i) => (
+          <a href={`/blog/${post.slug}/`} class="post-row">
+            <span class="post-index">{String(i + 1).padStart(2, "0")}</span>
+            <div class="post-info">
+              <h2 class="post-title">{post.data.title}</h2>
+              <p class="post-excerpt">{post.data.excerpt}</p>
+              <div class="post-tags">
+                {post.data.tags.map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+            <span class="post-date">{formatDate(post.data.date)}</span>
+            <span class="post-arrow">→</span>
           </a>
-        </li>
-      ))
-    }
-  </ul>
+        ))
+      }
+      {allPosts.length === 0 && <p class="empty">No posts yet — check back soon.</p>}
+    </div>
+  </main>
 </Layout>
+
+<style>
+  .blog-main {
+    min-height: 100svh;
+    padding: 7rem 3rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .blog-hero {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .blog-hero::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.18), transparent 70%);
+    filter: blur(110px);
+    top: -60%;
+    right: -10%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .blog-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 0.2s;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--fg);
+  }
+
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 10vw, 9rem);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    color: var(--fg);
+  }
+
+  .blog-sub {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-top: 0.75rem;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-row {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr auto 2rem;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s, padding 0.2s;
+    cursor: pointer;
+  }
+
+  .post-row:hover {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), rgba(219, 39, 119, 0.05), transparent);
+    border-radius: 4px;
+  }
+
+  .post-row:hover .post-arrow {
+    color: var(--green);
+    transform: translateX(4px);
+  }
+
+  .post-row:hover .post-title {
+    color: var(--green);
+  }
+
+  .post-index {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    align-self: start;
+    padding-top: 0.2rem;
+  }
+
+  .post-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--fg);
+    transition: color 0.2s;
+    margin-bottom: 0.3rem;
+  }
+
+  .post-excerpt {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    border: 1px solid #1f3010;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    align-self: start;
+    padding-top: 0.2rem;
+  }
+
+  .post-arrow {
+    color: var(--muted);
+    font-size: 1rem;
+    transition: color 0.2s, transform 0.2s;
+    align-self: start;
+    padding-top: 0.1rem;
+  }
+
+  .empty {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding: 3rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .blog-main { padding: 6rem 1.5rem 3rem; }
+    .post-row {
+      grid-template-columns: 2.5rem 1fr 2rem;
+      gap: 1rem;
+    }
+    .post-date { display: none; }
+  }
+</style>

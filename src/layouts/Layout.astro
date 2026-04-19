@@ -4,63 +4,145 @@ interface Props {
 }
 
 const { title } = Astro.props;
-const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Andreas Klumpp — Full Stack Developer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Lilita+One&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital@1&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
   </head>
-  <body class="font-sans">
-    <div class="m-20">
-      <slot />
-    </div>
+  <body>
+    <header class="site-header">
+      <a href="/" class="header-logo">AK.</a>
+      <nav class="header-nav">
+        <a href="/#about">About</a>
+        <a href="/blog">Blog</a>
+        <a href="https://github.com/andreasklumpp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
+    <slot />
   </body>
 
   <style is:global>
     :root {
-      --accent: 136, 58, 234;
-      --accent-light: 224, 204, 250;
-      --accent-dark: 49, 10, 101;
-      --accent-gradient: linear-gradient(
-        45deg,
-        rgb(var(--accent)),
-        rgb(var(--accent-light)) 30%,
-        white 60%
-      );
+      --green: #a3ff4f;
+      --bg: #0a0a0a;
+      --fg: #efefef;
+      --muted: #999;
+      --border: #1c1c1c;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'Space Mono', monospace;
     }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html {
-      font-family: system-ui, sans-serif;
-      background: rgb(18, 18, 18);
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--fg);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: var(--green);
+      color: #000;
+    }
+
     code {
-      font-family:
-        Menlo,
-        Monaco,
-        Lucida Console,
-        Liberation Mono,
-        DejaVu Sans Mono,
-        Bitstream Vera Sans Mono,
-        Courier New,
-        monospace;
+      font-family: var(--font-mono);
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.75rem 3rem;
+    }
+
+    .header-logo {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+
+    .header-logo:hover {
+      color: var(--green);
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .header-nav a {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+      color: var(--fg);
+    }
+
+    /* Prose styles for blog posts */
+    .prose {
+      color: var(--fg);
+      line-height: 1.8;
+      font-size: 1.05rem;
+      font-weight: 300;
+    }
+
+    .prose p { margin-bottom: 1.75em; }
+    .prose h2 { font-family: var(--font-display); font-size: 3rem; margin: 2em 0 0.5em; letter-spacing: 0.03em; }
+    .prose h3 { font-size: 1.3rem; font-weight: 600; margin: 1.5em 0 0.5em; }
+    .prose ul, .prose ol { padding-left: 1.5em; margin-bottom: 1.5em; }
+    .prose li { margin-bottom: 0.4em; }
+    .prose a { color: var(--green); text-decoration: underline; text-underline-offset: 3px; }
+    .prose strong { font-weight: 600; }
+    .prose code { font-family: var(--font-mono); font-size: 0.85em; background: #2a2a2a; padding: 0.2em 0.5em; border-radius: 4px; }
+    .prose pre { background: #111; border: 1px solid var(--border); border-radius: 8px; padding: 1.5em; overflow-x: auto; margin-bottom: 1.75em; }
+    .prose pre code { background: none; padding: 0; }
+    .prose blockquote { border-left: 3px solid var(--green); padding-left: 1.25em; color: var(--muted); margin: 1.5em 0; font-style: italic; }
+    .prose hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+
+    @media (max-width: 768px) {
+      .site-header { padding: 1.25rem 1.5rem; }
+      .header-nav { gap: 1.5rem; }
     }
   </style>
 </html>
